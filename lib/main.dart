@@ -1,32 +1,50 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(Column(
-      children: <Widget>[
-        Text(
-          'Deliver features faster',
-          textDirection: TextDirection.ltr,
-        ),
-        Text(
-          'Craft beautiful UIs',
-          textDirection: TextDirection.ltr,
-        ),
-        Text(
-          'Craft beautiful UIs',
-          textDirection: TextDirection.ltr,
-        ),
-        Column(
-          children: <Widget>[
-            Text(
-              'Craft beautiful UIs',
-              textDirection: TextDirection.ltr,
-            ),
-          ],
-        ),
-        Expanded(
-          child: FittedBox(
-            fit: BoxFit.contain, // otherwise the logo will be tiny
-            child: FlutterLogo(),
+void main() => runApp(
+      MaterialApp(
+        home: Scaffold(
+          body: ListaTransferencia(),
+          appBar: AppBar(title: Text('Transferências')),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {},
+            child: Icon(Icons.add),
           ),
         ),
+      ),
+    );
+
+class ListaTransferencia extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        ItemTransferencia(Transferencia(50.00, 19050)),
+        ItemTransferencia(Transferencia(60.00, 19051)),
+        ItemTransferencia(Transferencia(70.00, 19052)),
       ],
+    );
+  }
+}
+
+class ItemTransferencia extends StatelessWidget {
+  final Transferencia _transferencia;
+
+  ItemTransferencia(this._transferencia);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+        child: ListTile(
+      leading: Icon(Icons.monetization_on),
+      title: Text(_transferencia.valor.toString()),
+      subtitle: Text(_transferencia.numeroConta.toString()),
     ));
+  }
+}
+
+class Transferencia {
+  final double valor;
+  final int numeroConta;
+
+  Transferencia(this.valor, this.numeroConta);
+}
